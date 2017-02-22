@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobSchedule", "JobSchedule\JobSchedule.csproj", "{2ACF4B7C-800D-40CA-AD80-E7BADB100E1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job-FrameWork", "Job-FrameWork\Job-FrameWork.csproj", "{8677A9C2-73BA-4213-82FE-797130337220}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2ACF4B7C-800D-40CA-AD80-E7BADB100E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACF4B7C-800D-40CA-AD80-E7BADB100E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACF4B7C-800D-40CA-AD80-E7BADB100E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACF4B7C-800D-40CA-AD80-E7BADB100E1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8677A9C2-73BA-4213-82FE-797130337220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8677A9C2-73BA-4213-82FE-797130337220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8677A9C2-73BA-4213-82FE-797130337220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8677A9C2-73BA-4213-82FE-797130337220}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
