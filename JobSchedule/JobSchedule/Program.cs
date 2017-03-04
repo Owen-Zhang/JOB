@@ -20,7 +20,7 @@ namespace JobSchedule
 
                 JobManager.Run(Type.GetType(taskName), args);
 
-                Console.ReadLine();
+                Console.WriteLine("Program is excuted end");
             }
             catch (Exception err)
             {
