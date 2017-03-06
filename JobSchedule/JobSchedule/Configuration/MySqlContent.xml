@@ -1,0 +1,39 @@
+﻿<CommandFile>
+  <CommandList>
+    <Command Name="GetMySqlSechedulerInfo" DataBase="SheduleMySql" CommandType="Text">
+      <CommandText>
+        <![CDATA[
+        select
+          ID as Id,
+          START_TIME as StartTime,
+          END_TIME as EndTime,
+          EXIT_CODE as ExitCode,
+          PID as  Pid
+        from scheduler_history order by id desc limit @PageIndex,@PageSize
+      ]]>
+      </CommandText>
+      <Parameters>
+        <Parameter Name="@PageIndex" DbType="Int32" />
+        <Parameter Name="@PageSize"  DbType="Int32" />
+      </Parameters>
+    </Command>
+    <Command Name="GetMySqlSechedulerInfoByPid" DataBase="SheduleMySql" CommandType="Text">
+      <CommandText>
+        <![CDATA[
+        select 
+          ID as Id, 
+          START_TIME as StartTime, 
+          END_TIME as EndTime, 
+          EXIT_CODE as ExitCode, 
+          PID as  Pid,
+          LOG as Log
+        from scheduler_history 
+        where Pid = @Pid
+      ]]>
+      </CommandText>
+      <Parameters>
+        <Parameter Name="@Pid" DbType="Int32" />
+      </Parameters>
+    </Command>
+  </CommandList>
+</CommandFile>

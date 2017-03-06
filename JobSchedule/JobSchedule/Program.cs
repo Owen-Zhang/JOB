@@ -14,10 +14,11 @@ namespace JobSchedule
             //args = new string[]{"JobSchedule.Solr.ScheduleJob"};
             try
             {
+                DataAccess.DbManager.LoadDataAccessConfig();
+
                 var taskName = args[0];
                 if (string.IsNullOrWhiteSpace(taskName))
                     throw new Exception("please input TypeClass");
-
                 JobManager.Run(Type.GetType(taskName), args);
 
                 Console.WriteLine("Program is excuted end");

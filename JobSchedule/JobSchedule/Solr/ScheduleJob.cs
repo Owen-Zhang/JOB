@@ -1,9 +1,13 @@
-﻿using Job_FrameWork;
-using Job_FrameWork.Common;
-using JobSchedule.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using System.Net;
+using DataAccess;
+using Job_FrameWork;
+using JobSchedule.Model;
+using Job_FrameWork.Common;
+using System.Collections.Generic;
+using System.Configuration;
+
 
 namespace JobSchedule.Solr
 {
@@ -11,29 +15,28 @@ namespace JobSchedule.Solr
     {
         public override void Excute(string[] args)
         {
-            string url = "http://localhost:8080/solr/JobScheduler/update?boost=1.0&commitWithin=1000&overwrite=true&wt=json";
+            string url = ConfigurationManager.AppSettings["ScheduleSorlUrl"].ToString() + "?boost=1.0&commitWithin=1000&overwrite=true&wt=json";
+
+            var command = DbManager.GetDataCommand("GetMySqlSechedulerInfo");
+            command.SetParameterValue("@PageIndex", 0);
+            command.SetParameterValue("@PageSize", 100);
+            var scheduleData = command.QueryList<ScheduleDetailModel>();
+            if (scheduleData.Count == 0)
+                return;
 
             new HttpRestClient(
                     new WebHeaderCollection(){
                         {"Accept", ContentFormat.Json},
                         {"Content-Type", ContentFormat.Json},
                     }
-                ).PostByStrService<string>(url, "POST", new List<ScheduleDetailModel> { 
-                    new ScheduleDetailModel{
-                        Id = 6,
-                        StartTime = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
-                        EndTime = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
-                        ExitCode = 0,
-                        Pid = 1
-                    },
-                    new ScheduleDetailModel{
-                        Id = 7,
-                        StartTime = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
-                        EndTime = DateTime.Now.AddDays(6).ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
-                        ExitCode = 0,
-                        Pid = 1
-                    }
-                });
+                ).PostByStrService<string>(url, "POST", scheduleData.Select(item => 
+                    new {
+                        Id = item.Id,
+                        StartTime = item.StartTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
+                        EndTime = item.EndTime.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
+                        ExitCode =  item.ExitCode,
+                        Pid = item.Pid
+                    }));
         }
     }
 }
